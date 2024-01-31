@@ -72,6 +72,9 @@ add_subdirectory(src/zcc)
 add_subdirectory(src/zpragma)
 add_subdirectory(src/zx0)
 
+install(DIRECTORY include DESTINATION share/z88dk)
+install(DIRECTORY lib DESTINATION share/z88dk)
+
 # # `libsrc` stuff
 # include(ProcessorCount)
 # ProcessorCount(NPROC)
