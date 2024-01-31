@@ -72,29 +72,29 @@ add_subdirectory(src/zcc)
 add_subdirectory(src/zpragma)
 add_subdirectory(src/zx0)
 
-# `libsrc` stuff
-include(ProcessorCount)
-ProcessorCount(NPROC)
+# # `libsrc` stuff
+# include(ProcessorCount)
+# ProcessorCount(NPROC)
 
-set(LIBSRC_OVERRIDES
-    ZCCCFG=${PROJECT_SOURCE_DIR}/lib/config
-    PATH=/bin:/usr/bin:${CMAKE_BINARY_DIR}/src/zcc:${CMAKE_BINARY_DIR}/src/ucpp:${CMAKE_BINARY_DIR}/src/zpragma:${CMAKE_BINARY_DIR}/src/sccz80:${CMAKE_BINARY_DIR}/src/copt:${CMAKE_BINARY_DIR}/src/z80asm:${CMAKE_BINARY_DIR}/src/zx0
-)
+# set(LIBSRC_OVERRIDES
+#     ZCCCFG=${PROJECT_SOURCE_DIR}/lib/config
+#     PATH=/bin:/usr/bin:${CMAKE_BINARY_DIR}/src/zcc:${CMAKE_BINARY_DIR}/src/ucpp:${CMAKE_BINARY_DIR}/src/zpragma:${CMAKE_BINARY_DIR}/src/sccz80:${CMAKE_BINARY_DIR}/src/copt:${CMAKE_BINARY_DIR}/src/z80asm:${CMAKE_BINARY_DIR}/src/zx0
+# )
 
-add_custom_target(libsrc
-    ALL
-    DEPENDS zcc z88dk-ucpp z88dk-zpragma z88dk-sccz80 z88dk-copt z88dk-z80asm
-    BYPRODUCTS ${CMAKE_BINARY_DIR}/libsrc
-    COMMAND make -C ${PROJECT_SOURCE_DIR}/libsrc ${LIBSRC_OVERRIDES} -j${NPROC} && make -C ${PROJECT_SOURCE_DIR}/libsrc install
-    COMMAND make -C ${PROJECT_SOURCE_DIR}/libsrc/_DEVELOPMENT ${LIBSRC_OVERRIDES} -j${NPROC}
-    COMMAND make -C ${PROJECT_SOURCE_DIR}/include/_DEVELOPMENT ${LIBSRC_OVERRIDES} -j${NPROC}
+# add_custom_target(libsrc
+#     ALL
+#     DEPENDS zcc z88dk-ucpp z88dk-zpragma z88dk-sccz80 z88dk-copt z88dk-z80asm
+#     BYPRODUCTS ${CMAKE_BINARY_DIR}/libsrc
+#     COMMAND make -C ${PROJECT_SOURCE_DIR}/libsrc ${LIBSRC_OVERRIDES} -j${NPROC} && make -C ${PROJECT_SOURCE_DIR}/libsrc install
+#     COMMAND make -C ${PROJECT_SOURCE_DIR}/libsrc/_DEVELOPMENT ${LIBSRC_OVERRIDES} -j${NPROC}
+#     COMMAND make -C ${PROJECT_SOURCE_DIR}/include/_DEVELOPMENT ${LIBSRC_OVERRIDES} -j${NPROC}
 
-    # Cleanup
-    COMMAND find ${PROJECT_SOURCE_DIR}/libsrc -name "*.o" -type f -delete # Intermediate files, not needed
-    COMMAND find ${PROJECT_SOURCE_DIR}/libsrc -name "*.lib" -type f -delete # They'd already be moved to `lib/clibs`
-)
+#     # Cleanup
+#     COMMAND find ${PROJECT_SOURCE_DIR}/libsrc -name "*.o" -type f -delete # Intermediate files, not needed
+#     COMMAND find ${PROJECT_SOURCE_DIR}/libsrc -name "*.lib" -type f -delete # They'd already be moved to `lib/clibs`
+# )
 
-# Install standard library
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include DESTINATION share/z88dk)
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib DESTINATION share/z88dk)
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/libsrc DESTINATION share/z88dk/)
+# # Install standard library
+# install(DIRECTORY ${PROJECT_SOURCE_DIR}/include DESTINATION share/z88dk)
+# install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib DESTINATION share/z88dk)
+# install(DIRECTORY ${PROJECT_SOURCE_DIR}/libsrc DESTINATION share/z88dk/)
