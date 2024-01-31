@@ -74,6 +74,7 @@ add_subdirectory(src/zx0)
 
 install(DIRECTORY include DESTINATION share/z88dk)
 install(DIRECTORY lib DESTINATION share/z88dk)
+add_subdirectory(libsrc)
 
 # # `libsrc` stuff
 # include(ProcessorCount)
